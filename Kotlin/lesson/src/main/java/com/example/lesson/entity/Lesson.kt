@@ -1,6 +1,8 @@
 package com.example.lesson.entity
 
-class Lesson {
+// var可以直接初始化 变量
+class Lesson(var date: String?, var content: String?, var state: State?) {
+
     enum class State {
         PLAYBACK {
             override fun stateName(): String {
@@ -21,39 +23,5 @@ class Lesson {
         abstract fun stateName(): String?
     }
 
-
-    private var date: String? = null
-    private var content: String? = null
-    private var state: State? = null
-
-    constructor(date: String?, content: String?, state: State?) {
-        this.date = date
-        this.content = content
-        this.state = state
-    }
-
-    fun getState(): State? {
-        return state
-    }
-
-    fun setState(state: State?) {
-        this.state = state
-    }
-
-    fun getDate(): String? {
-        return date
-    }
-
-    fun setDate(date: String?) {
-        this.date = date
-    }
-
-    fun getContent(): String? {
-        return content
-    }
-
-    fun setContent(content: String?) {
-        this.content = content
-    }
 
 }

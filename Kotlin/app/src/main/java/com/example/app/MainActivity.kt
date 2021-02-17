@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val img_code = findViewById<CodeView>(R.id.code_view)
         btn_login.setOnClickListener(this)
         img_code.setOnClickListener(this)
+
     }
 
 
@@ -54,22 +55,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val password = et_password.text.toString()
         val code = et_code.text.toString()
         var user = User(username, password, code)
-        if (verify(user)) {
+
+        //内部函数
+        fun verify(): Boolean {
+            if (user.username?.length ?: 0 < 4) {
+                Utils.toast("用户名不合法")
+                return false
+            }
+            if (user.password?.length ?: 0 < 4) {
+                Utils.toast("密码不合法")
+                return false
+            }
+            return true
+        }
+        if (verify()) {
             CacheUtils.save(usernameKey, username);
             CacheUtils.save(passwordKey, password);
             startActivity(Intent(this, LessonActivity::class.java));
         }
     }
 
-    private fun verify(user: User): Boolean {
-        if (user.username != null && user.username!!.length < 4) {
-            Utils.toast("用户名不合法")
-            return false
-        }
-        if (user.password != null && user.password!!.length < 4) {
-            Utils.toast("密码不合法")
-            return false
-        }
-        return true
-    }
 }

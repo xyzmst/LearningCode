@@ -5,11 +5,12 @@ import android.content.Context
 
 class BaseApplication : Application() {
     companion object {
-        private lateinit var currentApplication: Context
+        @JvmStatic
+        @get:JvmName("currentApplication")
+        lateinit var currentApplication: Context
+            private set
 
-        fun currentApplication(): Context {
-            return currentApplication
-        }
+
     }
 
     override fun attachBaseContext(base: Context?) {
